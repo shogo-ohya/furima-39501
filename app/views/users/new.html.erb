@@ -1,0 +1,7 @@
+<%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+
+  <!-- フォームの内容 -->
+  ...
+  <%= f.submit "会員登録" ,class:"register-red-btn" %>
+<% end %>
