@@ -85,10 +85,10 @@ has_one :address
 | Column           | Type       | Options                        |
 |------------------|------------|--------------------------------|
 | postal_code      | string     | null: false                    |
-| prefecture_id    | string     | null: false                    |
+| prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
 | street           | string     | null: false                    |
-| building         | string     |                                |
+| building         | string     | null: true                     |
 | phone_number     | string     | null: false                    |
 
  
