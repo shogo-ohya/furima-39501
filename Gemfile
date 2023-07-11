@@ -77,3 +77,4 @@ end
 
 gem 'pg'
 gem 'devise'
+gem 'active_hash'
