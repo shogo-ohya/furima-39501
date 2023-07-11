@@ -55,7 +55,7 @@ has_many :orders
 | condition_id         | integer   | null: false                              |
 | prefecture_id        | integer   | null: false                              |
 | shopping_fee_id      | integer   | null: false                              |
-| shipping_duration_id | integer   | null: false                              |
+| shopping_duration_id | integer   | null: false                              |
 | category_id          | integer   | null: false                              |
 
 
