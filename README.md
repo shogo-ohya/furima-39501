@@ -31,11 +31,16 @@ Things you may want to cover:
 | Column           | Type    | Options                                 |
 |------------------|---------|-----------------------------------------|
 | id               | integer | PRIMARY KEY                             |
-| username         | string  | NOT NULL                                |
+| nickname         | string  | NOT NULL                                |
 | email            | string  | NOT NULL                                |
-| password_digest  | string  | NOT NULL                                |
-| created_at       | datetime|                                         |
-| updated_at       | datetime|                                         |
+| password         | string  | NOT NULL                                |
+| first_name       | string  |                                         |
+| last_name        | string  |                                         |
+| first_name_kana  | string  |                                         |
+| last_name_kana   | string  |                                         |
+| profile          | text    |                                         |
+| birthday         | date    |                                         |
+| image            | string  |                                         |
 
 ### Association
 has_many :items
@@ -45,15 +50,21 @@ has_one :addresses
 ## items テーブル
 商品情報を管理するテーブル
 
-| Column      | Type    | Options                                 |
-|-------------|---------|-----------------------------------------|
-| id          | integer | PRIMARY KEY                             |
-| name        | string  | NOT NULL                                |
-| description | text    |                                         |
-| price       | integer | NOT NULL                                |
-| user_id     | integer | FOREIGN KEY REFERENCES users(id)        |
-| created_at  | datetime|                                         |
-| updated_at  | datetime|                                         |
+| Column         | Type    | Options                                 |
+|----------------|---------|-----------------------------------------|
+| name           | string  | NOT NULL                                |
+| explanation    | text    |                                         |
+| price          | integer | NOT NULL                                |
+| user_id        | integer | FOREIGN KEY REFERENCES users(id)        |
+| condition_id   | datetime|                                         |
+| size_id        | datetime|                                         |
+|shopping_area_id|         |                                         |
+|shopping_price  |         |                                         |
+|shopping_date   |         |                                         |
+|shopping_method_id|       |                                         |
+|user_id         |         |                                         |
+|category_id     |         |                                         |
+|bland_id        |         |                                         |
 
 ### Association
 belong_to :users
@@ -65,12 +76,8 @@ has_many :orders
 
 | Column     | Type    | Options                                 |
 |------------|---------|-----------------------------------------|
-| id         | integer | PRIMARY KEY                             |
-| user_id    | integer | FOREIGN KEY REFERENCES users(id)        |
-| product_id | integer | FOREIGN KEY REFERENCES products(id)     |
-| quantity   | integer | NOT NULL                                |
-| created_at | datetime|                                         |
-| updated_at | datetime|                                         |
+| user_id    | integer | FOREIGN KEY (user_id)        |
+| item_id    | integer | FOREIGN KEY (item_id)     |
 
 ### Association
 belong_to :users
@@ -82,15 +89,12 @@ belong_to :items
 
 | Column       | Type    | Options                           |
 |--------------|---------|-----------------------------------|
-| id           | integer | PRIMARY KEY                       |
 | user_id      | integer | FOREIGN KEY REFERENCES users(id)  |
 | postal_code  | string  | NOT NULL                          |
 | prefecture   | string  | NOT NULL                          |
 | city         | string  | NOT NULL                          |
 | street       | string  | NOT NULL                          |
 | building     | string  |                                   |
-| created_at   | datetime| NOT NULL                          |
-| updated_at   | datetime| NOT NULL                          |
 
 ### Association
 belong_to :users
