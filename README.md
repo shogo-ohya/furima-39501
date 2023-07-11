@@ -28,72 +28,66 @@ Things you may want to cover:
 ## users テーブル
 ユーザー情報を管理するテーブル
 
-| Column           | Type    | Options                                 |
-|------------------|---------|-----------------------------------------|
-| nickname         | string  | NOT NULL                                |
-| email            | string  | NOT NULL                                |
-| password         | string  | NOT NULL                                |
-| first_name       | string  |                                         |
-| last_name        | string  |                                         |
-| first_name_kana  | string  |                                         |
-| last_name_kana   | string  |                                         |
-| profile          | text    |                                         |
-| birthday         | date    |                                         |
-| image            | string  |                                         |
+| Column                     | Type    | Options                                 |
+|----------------------------|---------|-----------------------------------------|
+| nickname                   | string  | null: false                             |
+| email                      | string  | UNIQUE                                  |
+| encrypted_password         | string  | null: false                             |
+| first_name                 | string  | null: false                             |
+| last_name                  | string  | null: false                             |
+| first_name_kana            | string  | null: false                             |
+| last_name_kana             | string  | null: false                             |
+| birthday                   | date    | null: false                                        |
 
 ### Association
 has_many :items
 has_many :orders
-has_one :addresses
 
 ## items テーブル
 商品情報を管理するテーブル
 
-| Column            | Type    | Options                                 |
-|-------------------|---------|-----------------------------------------|
-| name              | string  | NOT NULL                                |
-| explanation       | text    |                                         |
-| price             | integer | NOT NULL                                |
-| user_id           | integer | FOREIGN KEY REFERENCES users(id)        |
-| condition_id      | datetime|                                         |
-| size_id           | datetime|                                         |
-| shopping_area_id  | integer |                                         |
-| shopping_price    | integer |                                         |
-| shopping_date     | integer |                                         |
-| shopping_method_id| integer |                                         |
-| user_id           | integer |                                         |
-| category_id       | integer |                                         |
-| bland_id          | integer |                                         |
+| Column            | Type      | Options                                  |
+|-------------------|-----------|------------------------------------------|
+| name              | string    | null: false                              |
+| explanation       | text      |                                          |
+| price             | integer   | null: false                              |
+| user              | references| null: false, foreign_key: references users|
+| condition_id      | datetime  |                                          |
+| prefecture        | string    | null: false                              |
 
 ### Association
-belong_to :users
-has_many :orders
+belong_to :user
+has_many :order
 
 
 ## orders テーブル
 商品の購入情報を管理するテーブル
 
-| Column     | Type    | Options                                 |
-|------------|---------|-----------------------------------------|
-| user_id    | integer | FOREIGN KEY REFERENCES users(id)        |
-| item_id    | integer | FOREIGN KEY REFERENCES items(id)        |
+| Column     | Type       | Options                             |
+|------------|------------|-------------------------------------|
+| item       | references | FOREIGN KEY REFERENCES items        |
 
 ### Association
-belong_to :users
-belong_to :items
+belong_to :user
+belong_to :item
+has_one :addresses
 
 
 ## addressesテーブル
 発送先住所を管理するテーブル
 
-| Column       | Type    | Options                           |
-|--------------|---------|-----------------------------------|
-| user_id      | integer | FOREIGN KEY REFERENCES users(id)  |
-| postal_code  | string  | NOT NULL                          |
-| prefecture   | string  | NOT NULL                          |
-| city         | string  | NOT NULL                          |
-| street       | string  | NOT NULL                          |
-| building     | string  |                                   |
-
+| Column           | Type       | Options                           |
+|------------------|------------|-----------------------------------|
+| user             | references | FOREIGN KEY REFERENCES users   |
+| postal_code      | string     | null: false                    |
+| prefecture       | string     | null: false                    |
+| city             | string     | null: false                    |
+| street           | string     | null: false                    |
+| phone_number           | string     | null: false                    |
+| first_name       | string     | null: false                    |
+| last_name        | string     | null: false                    |
+| first_name_kana  | string     | null: false                    |
+| last_name_kana   | string     | null: false                    |
+ 
 ### Association
-belong_to :users
+belong_to :oder
