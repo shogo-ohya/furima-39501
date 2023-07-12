@@ -88,8 +88,9 @@ has_one :address
 | prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
 | street           | string     | null: false                    |
-| building         | string     | null: true                     |
+| building         | string     |                                |
 | phone_number     | string     | null: false                    |
+| order            | reference  | null: false, foreign_key: true |
 
  
 ### Association
