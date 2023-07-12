@@ -23,8 +23,6 @@ Things you may want to cover:
 
 * ...
 
-データベース設計
-
 ## users テーブル
 ユーザー情報を管理するテーブル
 
