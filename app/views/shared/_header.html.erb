@@ -19,7 +19,7 @@
   <div class="user_nav grid-6">
     <!--ログイン状態の場合のコンテンツ-->
     <li><%= link_to current_user.nickname %></li>
-    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn'%>
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }%>
     <%#= link_to "投稿する", new_user_session_path, class: "post" %>
   </div>
 <% else %>
