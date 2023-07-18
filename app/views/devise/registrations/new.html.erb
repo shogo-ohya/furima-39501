@@ -1,6 +1,7 @@
 <%= render "shared/second-header" %>
 
 <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
+
   <div class='form-wrap'>
     <div class='form-header'>
       <h1 class='form-header-text'>
@@ -8,9 +9,7 @@
       </h1>
     </div>
 
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
     <%= render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
     <div class="form-group">
       <div class='form-text-wrap'>
@@ -55,8 +54,8 @@
         <span class="indispensable">必須</span>
       </div>
       <div class='input-name-wrap'>
-        <%= f.text_area :last_name, class: "input-name", id: "last_name", placeholder: "例) 山田" %>
-        <%= f.text_area :first_name, class: "input-name", id: "first_name", placeholder: "例) 陸太郎" %>
+        <%= f.text_area :first_name, class: "input-name", id: "first_name", placeholder: "例) 山田" %>
+        <%= f.text_area :last_name, class: "input-name", id: "last_name", placeholder: "例) 陸太郎" %>
       </div>
     </div>
     <div class="form-group">
