@@ -9,7 +9,7 @@ FactoryBot.define do
   # Gimei
   # 直接日本語を記入する
     email { Faker::Internet.email }
-    password { Faker::Internet.password(min_length: 6) }
+    password { '1a' + Faker::Internet.password(min_length: 4) }
     password_confirmation { password }
     birthday { Faker::Date.between(from: '1930-01-01', to: '2005-12-31') }
   end
