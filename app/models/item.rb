@@ -5,14 +5,13 @@ class Item < ApplicationRecord
 
   validates :image, presence: true
 
-  validates :name, presence: true, length: { maximum: 40 }
 
 
   
 
 
-  # 商品名が必須
-  validates :name, presence: {message: "can't be blank"}
+  # 商品名が必須で最大40文字まで許容
+  validates :name, presence: { message: "can't be blank" }, length: { maximum: 40 }
 
   # 商品の説明が必須
   validates :explanation, presence: {message: "can't be blank"}

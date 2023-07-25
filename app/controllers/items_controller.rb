@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_action :require_login, only: [:new]
+  before_action :require_login, only: [:new, :index, :show]
 
 
   def index
@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: '商品情報が登録されました。'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
