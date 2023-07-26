@@ -6,11 +6,6 @@ class ApplicationController < ActionController::Base
   
   private
 
-  def require_login
-    unless user_signed_in?
-      redirect_to new_user_session_path, alert: "ログインしてください"
-    end
-  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email, :password, :password_confirmation,:first_name,:last_name,:first_name_kana,:last_name_kana,:birthday])

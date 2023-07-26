@@ -13,4 +13,6 @@ FactoryBot.define do
     password_confirmation { password }
     birthday { Faker::Date.between(from: '1930-01-01', to: '2005-12-31') }
   end
+
+  has_many :items
 end

@@ -11,4 +11,6 @@ FactoryBot.define do
     image_path = Rails.root.join('spec', 'support', 'test_images', 'sample.jpg')
     image { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'test_images', 'sample.jpg'), 'image/jpeg') }
   end
+
+  belong_to :use
 end

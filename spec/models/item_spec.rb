@@ -13,6 +13,18 @@ RSpec.describe Item, type: :model do
       expect(item.errors[:image]).to include("can't be blank")
     end
 
+    it "is not valid without a category_id" do
+      describe 'validations' do
+        context 'when category_id is nil' do
+          it "is not valid" do
+            item = build(:item, category_id: nil)
+            expect(item).not_to be_valid
+            expect(item.errors[:category_id]).to include("can't be blank")
+          end
+        end
+      end
+    end
+
     it "is not valid without a name" do
       item = build(:item, name: nil)
       expect(item).not_to be_valid
@@ -25,13 +37,15 @@ RSpec.describe Item, type: :model do
       expect(item.errors[:name]).to include("is too long (maximum is 40 characters)")
     end
 
-    it "is not valid without a category_id" do
-      item = build(:item, category_id: nil)
-      expect(item).not_to be_valid
-      expect(item.errors[:category_id]).to include("can't be blank")
-    end
+    
 
-    # 他のバリデーションのテストを追加することができる
+    context 'when user is not associated' do
+      it "is not valid" do
+        item = build(:item, user: nil)
+        expect(item).not_to be_valid
+        expect(item.errors[:user]).to include("must exist")
+      end
+    end
   end
 
   context "price validations" do
@@ -58,8 +72,6 @@ RSpec.describe Item, type: :model do
       expect(item).not_to be_valid
       expect(item.errors[:price]).to include("is not a number")
     end
-
-    # 他の価格のバリデーションのテストを追加することができる
   end
 end
 

@@ -35,10 +35,34 @@ class Item < ApplicationRecord
   validates :price, presence: {message: "can't be blank"}
 
   # 価格は¥300〜¥9,999,999の間のみ保存可能であること
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
   # 価格は半角数値のみ保存可能であること
-  validates :price, format: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
+  validates :price,{ message: "は半角数値で入力してください" }
+
+  validate :validate_selected_options
+
+  def validate_selected_options
+    if category_id.nil?
+      errors.add(:category_id, "must be selected")
+    end
+
+    if condition_id.nil?
+      errors.add(:condition_id, "must be selected")
+    end
+
+    if shopping_fee_id.nil?
+      errors.add(:shopping_fee_id, "must be selected")
+    end
+
+    if prefecture_id.nil?
+      errors.add(:prefecture_id, "must be selected")
+    end
+
+    if shopping_duration_id.nil?
+      errors.add(:shopping_duration_id, "must be selected")
+    end
+  end
 
   def was_attached?
     self.image.attached?
