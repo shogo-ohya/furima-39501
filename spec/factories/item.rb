@@ -12,5 +12,5 @@ FactoryBot.define do
     image { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'test_images', 'sample.jpg'), 'image/jpeg') }
   end
 
-  belong_to :use
+  association :user
 end

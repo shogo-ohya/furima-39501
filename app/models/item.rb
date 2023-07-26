@@ -17,19 +17,19 @@ class Item < ApplicationRecord
   validates :explanation, presence: {message: "can't be blank"}
 
   # カテゴリーの情報が必須
-  validates :category_id, presence: {message: "can't be blank"}
+  validates :category_id, presence: {message: "can't be blank"}, numericality: { other_than: 0 }
 
   # 商品の状態の情報が必須
-  validates :condition_id, presence: {message: "can't be blank"}
+  validates :condition_id, presence: {message: "can't be blank"}, numericality: { other_than: 0 }
 
   # 配送料の負担の情報が必須
-  validates :shopping_fee_id, presence: {message: "can't be blank"}
+  validates :shopping_fee_id, presence: {message: "can't be blank"}, numericality: { other_than: 0 }
 
   # 発送元の地域の情報が必須
-  validates :prefecture_id, presence: {message: "can't be blank"}
+  validates :prefecture_id, presence: {message: "can't be blank"}, numericality: { other_than: 0 }
 
   # 発送までの日数の情報が必須
-  validates :shopping_duration_id, presence: {message: "can't be blank"}
+  validates :shopping_duration_id, presence: {message: "can't be blank"}, numericality: { other_than: 0 }
 
   # 価格の情報が必須
   validates :price, presence: {message: "can't be blank"}
