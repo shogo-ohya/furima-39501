@@ -8,9 +8,13 @@ FactoryBot.define do
     prefecture_id { 1 }
     shopping_duration_id { 1 }
     price { 1000 }
-    image_path = Rails.root.join('spec', 'support', 'test_images', 'sample.jpg')
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'test_images', 'sample.jpg'), 'image/jpeg') }
+      
+    association :user
+
+    after(:build) do |message|
+      message.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
+
   end
 
-  association :user
 end

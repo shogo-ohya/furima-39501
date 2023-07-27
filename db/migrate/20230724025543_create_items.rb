@@ -10,7 +10,6 @@ class CreateItems < ActiveRecord::Migration[7.0]
       t.integer :shopping_fee_id
       t.integer :shopping_duration_id
       t.integer :category_id
-
       t.timestamps
     end
   end

@@ -35,7 +35,7 @@ has_many :orders
 
 
 ### Association
-belong_to :user
+belongs_to :user
 has_one :order
 
 
@@ -48,8 +48,8 @@ has_one :order
 | user               | references   | null: false, foreign_key: true      |
 
 ### Association
-belong_to :user
-belong_to :item
+belongs_to :user
+belongs_to :item
 has_one :address
 
 
@@ -68,4 +68,4 @@ has_one :address
 
  
 ### Association
-belong_to :order
+belongs_to :order

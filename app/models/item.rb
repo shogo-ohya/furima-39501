@@ -1,14 +1,9 @@
 class Item < ApplicationRecord
   has_one_attached :image
-  
-  
 
+  belongs_to :user
+  
   validates :image, presence: true
-
-
-
-  
-
 
   # 商品名が必須で最大40文字まで許容
   validates :name, presence: { message: "can't be blank" }, length: { maximum: 40 }
@@ -36,9 +31,6 @@ class Item < ApplicationRecord
 
   # 価格は¥300〜¥9,999,999の間のみ保存可能であること
   validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-
-  # 価格は半角数値のみ保存可能であること
-  validates :price,{ message: "は半角数値で入力してください" }
 
   validate :validate_selected_options
 
