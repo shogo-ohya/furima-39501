@@ -40,33 +40,33 @@ RSpec.describe Item, type: :model do
       end
 
       it "カテゴリーが選択されていないと出品できない" do
-        @item.category_id = ''
+        @item.category_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be selected")
+        expect(@item.errors.full_messages).to include("Category must be other than 0")
       end
 
       it "商品の状態が選択されていないと出品できない" do
-        @item.condition_id = ''
+        @item.condition_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be selected")
+        expect(@item.errors.full_messages).to include("Condition must be other than 0")
       end
 
       it "配送料の負担の情報が選択されていないと出品できない" do
-        @item.shopping_fee_id = ''
+        @item.shopping_fee_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shopping fee must be selected")
+        expect(@item.errors.full_messages).to include("Shopping fee must be other than 0")
       end
 
       it"発送元の情報が入力されていないと選択ができない" do
-        @item.prefecture_id = ''
+        @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be selected")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
       end
 
       it "発送までの日数情報が選択されていないと出品ができない" do
-        @item.shopping_duration_id = ''
+        @item.shopping_duration_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shopping duration must be selected")
+        expect(@item.errors.full_messages).to include("Shopping duration must be other than 0")
       end
 
       it "商品の説明が入力されていないと出品できない" do
