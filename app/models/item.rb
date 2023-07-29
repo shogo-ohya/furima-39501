@@ -34,29 +34,4 @@ class Item < ApplicationRecord
 
   validate :validate_selected_options
 
-  def validate_selected_options
-    if category_id.nil?
-      errors.add(:category_id, "must be selected")
-    end
-
-    if condition_id.nil?
-      errors.add(:condition_id, "must be selected")
-    end
-
-    if shopping_fee_id.nil?
-      errors.add(:shopping_fee_id, "must be selected")
-    end
-
-    if prefecture_id.nil?
-      errors.add(:prefecture_id, "must be selected")
-    end
-
-    if shopping_duration_id.nil?
-      errors.add(:shopping_duration_id, "must be selected")
-    end
-  end
-
-  def was_attached?
-    self.image.attached?
-  end
 end

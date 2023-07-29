@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   # 商品一覧ページへのルーティング
-  resources :items
+  resources :items, only: [:index]
 
   # ルートURLを商品一覧ページに設定
   root 'items#index'

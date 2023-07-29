@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
 
   def index
+    @items = Item.all
   end
 
   def new
@@ -42,8 +43,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.user = current_user # 現在のログインユーザーをアイテムのユーザーに設定
-
 
     if @item.save
       redirect_to root_path, notice: '商品情報が登録されました。'
