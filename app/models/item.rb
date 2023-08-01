@@ -2,6 +2,12 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
+
+  has_one :order
+
+  #def sold_out?
+    #order.present?
+  #end
   
   validates :image, presence: true
 
@@ -32,6 +38,6 @@ class Item < ApplicationRecord
   # 価格は¥300〜¥9,999,999の間のみ保存可能であること
   validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
-  validate :validate_selected_options
+  #validate :validate_selected_options
 
 end
