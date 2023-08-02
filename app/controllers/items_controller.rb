@@ -17,16 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-    #@category_name = Category.data.find { |c| c[:id] == @item.category_id }[:name]
-
-    @user = @item.user
-    if user_signed_in? && current_user == @user
-      @can_edit_or_delete = true
-    else
-      @can_edit_or_delete = false
-    end
-  
+    @item = Item.find(params[:id])  
 
   end
   
