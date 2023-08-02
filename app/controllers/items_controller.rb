@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order(created_at: :desc)
-
   end
 
   def new
@@ -17,13 +16,23 @@ class ItemsController < ApplicationController
 
   end
 
-  #def show
-    #@item = Item.find(params[:id])
-  #end
+  def show
+    @item = Item.find(params[:id])
+    #@category_name = Category.data.find { |c| c[:id] == @item.category_id }[:name]
+
+    @user = @item.user
+    if user_signed_in? && current_user == @user
+      @can_edit_or_delete = true
+    else
+      @can_edit_or_delete = false
+    end
   
-  #def edit
-    #@item = Item.find(params[:id])
-  #end
+
+  end
+  
+  def edit
+    @item = Item.find(params[:id])
+  end
   
   #def update
     #@item = Item.find(params[:id])
@@ -35,12 +44,12 @@ class ItemsController < ApplicationController
     #end
   #end
   
-  #def destroy
-   # @item = Item.find(params[:id])
-    #@item.destroy
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
   
-    #redirect_to items_path, notice: '商品情報が削除されました。'
-  #end
+    redirect_to items_path, notice: '商品情報が削除されました。'
+  end
   
   
   
