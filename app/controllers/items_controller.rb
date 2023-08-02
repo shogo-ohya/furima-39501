@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order(created_at: :desc)
-
   end
 
   def new
@@ -17,12 +16,13 @@ class ItemsController < ApplicationController
 
   end
 
-  #def show
-    #@item = Item.find(params[:id])
-  #end
+  def show
+    @item = Item.find(params[:id])  
+
+  end
   
   #def edit
-    #@item = Item.find(params[:id])
+   # @item = Item.find(params[:id])
   #end
   
   #def update
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   #end
   
   #def destroy
-   # @item = Item.find(params[:id])
+    #@item = Item.find(params[:id])
     #@item.destroy
   
     #redirect_to items_path, notice: '商品情報が削除されました。'
