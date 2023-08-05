@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :require_login, only: [:new, :edit, :update]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :redirect_unless_owner, only: [:edit, :update]
 
 
@@ -45,12 +45,19 @@ class ItemsController < ApplicationController
     end
   end
   
-  #def destroy
-    #@item = Item.find(params[:id])
-    #@item.destroy
-  
-    #redirect_to items_path, notice: '商品情報が削除されました。'
-  #end
+  def destroy
+    if current_user.id == @item.user_id
+
+      if@item.destroy
+        redirect_to root_path, notice: '商品情報が削除されました。'
+      else
+        render :show
+      end
+    else
+      redirect_to root_path, alert: '削除権限がありません。'
+
+    end
+  end
   
   
   
