@@ -9,7 +9,9 @@ app/assets/stylesheets/items/new.css %>
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item,local: true do |f| %>
 
-    <% render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: f.object %>
+
+
 
     <%# 商品画像 %>
     <div class="img-upload">
@@ -116,6 +118,31 @@ app/assets/stylesheets/items/new.css %>
       </div>
     </div>
     <%# /販売価格 %>
+    <script>
+  // 販売価格の入力欄が変更されたときに実行される関数
+  function calculateCommissionAndProfit() {
+    const priceInput = document.getElementById('item-price');
+    const addTaxPriceSpan = document.getElementById('add-tax-price');
+    const profitSpan = document.getElementById('profit');
+
+    // 入力された価格を整数に変換
+    const price = parseInt(priceInput.value, 10);
+
+    // 販売手数料の計算（価格の10%を計算し、小数点以下を切り捨て）
+    const commission = Math.floor(price * 0.1);
+
+    // 販売利益の計算（価格から販売手数料を引いた金額）
+    const profit = price - commission;
+
+    // 計算結果を表示
+    addTaxPriceSpan.textContent = commission.toLocaleString();
+    profitSpan.textContent = profit.toLocaleString();
+  }
+
+  // 販売価格の入力欄が変更されたときにcalculateCommissionAndProfit関数を呼び出す
+  const priceInput = document.getElementById('item-price');
+  priceInput.addEventListener('input', calculateCommissionAndProfit);
+  </script>
 
     <%# 注意書き %>
     <div class="caution">
@@ -139,7 +166,7 @@ app/assets/stylesheets/items/new.css %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "#", class:"back-btn" %>
+      <%=link_to 'もどる', item_path(@item), class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>

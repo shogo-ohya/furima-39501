@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
 
-  before_action :require_login, only: [:new]
+  before_action :require_login, only: [:new, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :redirect_unless_owner, only: [:edit, :update]
 
 
   
@@ -17,23 +19,31 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])  
-
   end
   
   def edit
-    @item = Item.find(params[:id])
   end
   
-  #def update
-    #@item = Item.find(params[:id])
-  
-   # if @item.update(item_params)
-      #redirect_to @item, notice: '商品情報が更新されました。'
-    #else
-      #render :edit
-    #end
-  #end
+  def update
+
+    if @item.update(item_params)
+      redirect_to @item
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  rescue ActiveRecord::RecordNotFound 
+    redirect_to root_path
+  end
+
+  def redirect_unless_owner
+    if current_user && @item.user_id != current_user.id
+      redirect_to root_path
+    end
+  end
   
   #def destroy
     #@item = Item.find(params[:id])
