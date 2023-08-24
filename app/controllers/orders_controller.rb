@@ -1,21 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :index]
-  before_action :move_to_index_if_own_item, only: [:index, :new, :create]
+  before_action :authenticate_user!, only: [:create, :index]
+  before_action :move_to_index_if_own_item, only: [:index, :create]
   before_action :redirect_root_path, only: [:index]
-  before_action :move_to_index_if_sold_out, only: [:index, :new, :create]
+  before_action :move_to_index_if_sold_out, only: [:index,:create]
   before_action : set_item, only:[:index,:create, :redirect_root_path, :move_to_index_if_sold_out, :move_to_index_if_own_item]
-  
-  def new
-    @order_address = OrderAddress.new
-  end
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_address = OrderAddress.new
   end
 
   def create
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
@@ -50,6 +44,7 @@ class OrdersController < ApplicationController
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
 
     Payjp::Charge.create(
         amount: @item.price,         # 商品の値段

@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  # ユーザー情報の表示・更新などのルート
-  resources :users, only: [:edit, :update]
-
   devise_for :users
 
   resources :items do
