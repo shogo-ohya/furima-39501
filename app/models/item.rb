@@ -5,9 +5,9 @@ class Item < ApplicationRecord
 
   has_one :order
 
-  #def sold_out?
-    #order.present?
-  #end
+  def sold_out?
+    order.present?
+  end
   
   validates :image, presence: true
 

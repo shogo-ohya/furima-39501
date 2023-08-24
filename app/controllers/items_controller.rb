@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :require_login, only: [:new, :edit, :update]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :redirect_unless_owner, only: [:edit, :update]
+  before_action :move_to_index_sold_out, only: :edit
 
 
   
@@ -19,6 +20,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
+
   end
   
   def edit
@@ -35,6 +38,7 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+    
   rescue ActiveRecord::RecordNotFound 
     redirect_to root_path
   end
@@ -73,6 +77,13 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def move_to_index_sold_out
+    item = Item.find(params[:id])
+    if item.sold_out?
+      redirect_to root_path
+    end
+  end
 
   def require_login
     unless user_signed_in?

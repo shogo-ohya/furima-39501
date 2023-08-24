@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
 
   # ユーザー情報の表示・更新などのルート
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:edit, :update]
 
-  # 商品一覧ページへのルーティング
-  resources :items
+  devise_for :users
+
+  resources :items do
+    resources :orders, only:[:new, :index, :create]
+  end
+
+  
+  # オーダー作成のルーティング
 
   # ルートURLを商品一覧ページに設定
   root 'items#index'
+
 end
