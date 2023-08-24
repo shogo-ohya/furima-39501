@@ -36,13 +36,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-    
-  rescue ActiveRecord::RecordNotFound 
-    redirect_to root_path
-  end
-
   def redirect_unless_owner
     if current_user && @item.user_id != current_user.id
       redirect_to root_path
@@ -62,9 +55,6 @@ class ItemsController < ApplicationController
 
     end
   end
-  
-  
-  
 
   def create
     @item = Item.new(item_params)
@@ -76,14 +66,17 @@ class ItemsController < ApplicationController
     end
   end
 
-  private
-
-  def move_to_index_sold_out
-    item = Item.find(params[:id])
-    if item.sold_out?
-      redirect_to root_path
-    end
+  def set_item
+    @item = Item.find(params[:id])
+  
+    # 商品が売り切れていた場合、root_pathへリダイレクト
+    redirect_to root_path if @item.sold_out?
+  
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
+
+  private
 
   def require_login
     unless user_signed_in?
@@ -95,8 +88,5 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :explanation, :price, :condition_id, :prefecture_id, :shopping_fee_id, :shopping_duration_id, :category_id,:image).merge(user_id: current_user.id)
   end
 
-  #def message_params
-    #params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
-  #end
 end
 
