@@ -15,6 +15,7 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it 'buildingが空でも保存できる' do
+        @order_address.building = ''
         expect(@order_address).to be_valid
       end
     end

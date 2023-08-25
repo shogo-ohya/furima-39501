@@ -5,10 +5,6 @@ class ItemsController < ApplicationController
   before_action :redirect_unless_owner, only: [:edit, :update]
   before_action :move_to_index_sold_out, only: :edit
 
-
-  
-
-
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -73,6 +69,10 @@ class ItemsController < ApplicationController
 
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
+  end
+
+  def move_to_index_sold_out
+    redirect_to root_path if @item.sold_out?
   end
 
   def require_login
