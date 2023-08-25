@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :move_to_index_if_own_item, only: [:index, :create]
   before_action :redirect_root_path, only: [:index]
   before_action :move_to_index_if_sold_out, only: [:index,:create]
-  before_action : set_item, only:[:index,:create, :redirect_root_path, :move_to_index_if_sold_out, :move_to_index_if_own_item]
+  before_action :set_item, only:[:index,:create, :redirect_root_path, :move_to_index_if_sold_out, :move_to_index_if_own_item]
 
   def index
     @order_address = OrderAddress.new
