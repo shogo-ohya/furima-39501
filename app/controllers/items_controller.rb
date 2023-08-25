@@ -64,15 +64,16 @@ class ItemsController < ApplicationController
     end
   end
 
+
+
+  private
+
   def set_item
     @item = Item.find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
-
-  private
-
 
   def require_login
     unless user_signed_in?
