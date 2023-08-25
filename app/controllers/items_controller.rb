@@ -20,8 +20,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
-
   end
   
   def edit
@@ -68,15 +66,13 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-  
-    # 商品が売り切れていた場合、root_pathへリダイレクト
-    redirect_to root_path if @item.sold_out?
-  
+
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
 
   private
+
 
   def require_login
     unless user_signed_in?
