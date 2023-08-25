@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index]
+  before_action :set_item, only:[:index,:create]
+  before_action :set_public_key, only:[:index,:create]
   before_action :move_to_index_if_own_item, only: [:index, :create]
   before_action :redirect_root_path, only: [:index]
   before_action :move_to_index_if_sold_out, only: [:index,:create]
-  before_action :set_item, only:[:index,:create, :redirect_root_path, :move_to_index_if_sold_out, :move_to_index_if_own_item]
 
   def index
     @order_address = OrderAddress.new
@@ -31,26 +32,29 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index_if_sold_out
-    if item.order.present?
+    if @item.order.present?
       redirect_to root_path
     end
   end
 
   def move_to_index_if_own_item
-    if current_user.id == item.user_id
+    if current_user.id == @item.user_id
       redirect_to root_path
     end
   end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
 
     Payjp::Charge.create(
         amount: @item.price,         # 商品の値段
         card: order_params[:token],    # カードトークン
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
+  end
+
+  def set_public_key
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
 
   def order_params
