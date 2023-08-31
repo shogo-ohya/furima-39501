@@ -16,6 +16,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @category_name = Category.find(@item.category_id).name
+
   end
   
   def edit

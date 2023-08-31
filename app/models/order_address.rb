@@ -8,8 +8,7 @@ class OrderAddress
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city, presence: { message: "can't be blank" }
     validates :address, presence: { message: "can't be blank" }
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number' }
-    validates :phone_number, length: { in: 10..11, too_long: 'is too long', too_short: 'is too short' }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number' }, length: { in: 10..11, too_long: 'is too long', too_short: 'is too short' }
     validates :user_id
     validates :item_id
   end
