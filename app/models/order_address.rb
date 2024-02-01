@@ -3,7 +3,7 @@ class OrderAddress
   attr_accessor :token, :postal_code, :prefecture_id, :city, :building, :phone_number, :address, :order_id, :item_id, :user_id
   
   with_options presence: true do
-    validates :token, presence: { message: "can't be blank" }
+    validates :token, presence: { message: "クレジットカード情報を入力してください" }
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city, presence: { message: "can't be blank" }
