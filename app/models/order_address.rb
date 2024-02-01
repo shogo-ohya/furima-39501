@@ -3,12 +3,12 @@ class OrderAddress
   attr_accessor :token, :postal_code, :prefecture_id, :city, :building, :phone_number, :address, :order_id, :item_id, :user_id
   
   with_options presence: true do
-    validates :token, presence: { message: "クレジットカード情報を入力してください" }
-    validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
-    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :city, presence: { message: "can't be blank" }
-    validates :address, presence: { message: "can't be blank" }
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Input only number' }, length: { in: 10..11, too_long: 'is too long', too_short: 'is too short' }
+    validates :token, presence: { message: "を入力してください" }
+    validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'の形式が正しくありません（例: 123-4567）' }
+    validates :prefecture_id, numericality: { other_than: 1, message: "を選択してください" }
+    validates :city, presence: { message: "を入力してください" }
+    validates :address, presence: { message: "を入力してください" }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'の形式が正しくありません（半角数字のみ入力してください）' }, length: { in: 10..11, too_long: 'が長すぎます', too_short: 'が短すぎます' }
     validates :user_id
     validates :item_id
   end
