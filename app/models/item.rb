@@ -18,19 +18,19 @@ class Item < ApplicationRecord
   validates :explanation, presence: {message: "を入力してください"}
 
   # カテゴリーの情報が必須
-  validates :category_id, presence: {message: "Category must be selected"}, numericality: { other_than: 1 }
+  validates :category_id, presence: { message: "カテゴリーを選択してください" }, numericality: { other_than: 1, message: "を選択してください" }
 
   # 商品の状態の情報が必須
-  validates :condition_id, presence: {message: "Condition must be selected"}, numericality: { other_than: 1 }
+  validates :condition_id, presence: {message: "商品の状態を選択してください"}, numericality: { other_than: 1, message: "を選択してください"}
 
   # 配送料の負担の情報が必須
-  validates :shopping_fee_id, presence: {message: "Shopping fee must be selected"}, numericality: { other_than: 1 }
+  validates :shopping_fee_id, presence: {message: "配送料の負担を選択してください"}, numericality: { other_than: 1, message: "を選択してください"}
 
   # 発送元の地域の情報が必須
-  validates :prefecture_id, presence: {message: "Prefecture must be selected"}, numericality: { other_than: 1 }
+  validates :prefecture_id, presence: {message: "発送元の地域を選択してください"}, numericality: { other_than: 1, message: "を選択してください"}
 
   # 発送までの日数の情報が必須
-  validates :shopping_duration_id, presence: {message: "Shopping duration must be selected"}, numericality: { other_than: 1 }
+  validates :shopping_duration_id, presence: {message: "発送までの日数を選択してください"}, numericality: { other_than: 1, message: "を選択してください"}
 
   # 価格の情報が必須
   validates :price, presence: {message: "を入力してください"}
