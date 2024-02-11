@@ -18,7 +18,7 @@ class Item < ApplicationRecord
   validates :explanation, presence: {message: "を入力してください"}
 
   # カテゴリーの情報が必須
-  validates :category_id, presence: { message: "カテゴリーを選択してください" }, numericality: { other_than: 1, message: "を選択してください" }
+  validates :category_id, presence: { message: "カテゴリーを選択してください" }, numericality: { other_than: 1 , message: "を選択してください"}
 
   # 商品の状態の情報が必須
   validates :condition_id, presence: {message: "商品の状態を選択してください"}, numericality: { other_than: 1, message: "を選択してください"}

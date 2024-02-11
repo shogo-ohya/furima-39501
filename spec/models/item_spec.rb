@@ -18,58 +18,58 @@ RSpec.describe Item, type: :model do
       it "画像が空では出品できない" do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("商品画像を入力して下さい")
+        expect(@item.errors.full_messages).to include("商品画像を入力してください")
       end
 
       it "商品名が入力されていないと出品できない" do
         @item.name = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("商品名を入力して下さい")
+        expect(@item.errors.full_messages).to include("商品名を入力してください")
       end
 
       it "商品名が40文字を超えると出品できない" do
         @item.name = "a" * 41
         @item.valid?
-        expect(@item.errors.full_messages).to include("商品名が長すぎます")
+        expect(@item.errors.full_messages).to include("商品名は40文字以内で入力してください")
       end
 
       it "ユーザーが紐付いていないと出品できない" do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include("Userを入力してください")
       end
 
       it "カテゴリーが選択されていないと出品できない" do
-        @item.category_id = 0
+        @item.category_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("カテゴリーを選択してください")
       end
 
       it "商品の状態が選択されていないと出品できない" do
-        @item.condition_id = 0
+        @item.condition_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("商品の状態を選択してください")
       end
 
       it "配送料の負担の情報が選択されていないと出品できない" do
-        @item.shopping_fee_id = 0
+        @item.shopping_fee_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("配送料の負担の情報を選択してください")
+        expect(@item.errors.full_messages).to include("配送料の負担配送料の負担を選択してください", "配送料の負担を選択してください")
       end
 
-      it"発送元の情報が入力されていないと選択ができない" do
-        @item.prefecture_id = 0
+      it"発送元の情報が選択されていないと選択ができない" do
+        @item.prefecture_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("発送元の地域を入力してください")
+        expect(@item.errors.full_messages).to include("発送元の地域発送元の地域を選択してください", "発送元の地域を選択してください")
       end
 
       it "発送までの日数情報が選択されていないと出品ができない" do
-        @item.shopping_duration_id = 0
+        @item.shopping_duration_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("発送までの日数情報を選択してください")
+        expect(@item.errors.full_messages).to include("発送までの日数発送までの日数を選択してください", "発送までの日数を選択してください")
       end
 
-      it "商品の説明が入力されていないと出品できない" do
+      it "商品の説明が選択されていないと出品できない" do
         @item.explanation = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("商品の説明を入力してください")

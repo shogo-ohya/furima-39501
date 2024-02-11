@@ -6,6 +6,10 @@ class OrdersController < ApplicationController
   before_action :redirect_root_path, only: [:index]
   before_action :move_to_index_if_sold_out, only: [:index,:create]
 
+  def new
+    @order_address = OrderAddress.new
+  end
+  
   def index
     @order_address = OrderAddress.new
   end
